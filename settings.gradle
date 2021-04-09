@@ -1,0 +1,2 @@
+include ':app', ':hilibrary', ':hiui'
+rootProject.name='hi-library'

@@ -31,6 +31,7 @@ public class HiViewUtil {
                 ViewGroup container = (ViewGroup) node;
                 for (int i = 0, count = container.getChildCount(); i < count; i++) {
                     deque.add(container.getChildAt(i));
+
                 }
             }
         }

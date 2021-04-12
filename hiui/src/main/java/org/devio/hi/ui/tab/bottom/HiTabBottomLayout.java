@@ -128,7 +128,7 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         flParams.gravity = Gravity.BOTTOM;
         addBottomLine();
         addView(fl, flParams);
-//        fixContentView();
+        fixContentView();
     }
 
     public void setTabAlpha(float alpha) {

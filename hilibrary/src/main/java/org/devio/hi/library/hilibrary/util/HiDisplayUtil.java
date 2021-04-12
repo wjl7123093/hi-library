@@ -1,4 +1,4 @@
-package org.devio.hi.library.hilibrary.log;
+package org.devio.hi.library.hilibrary.util;
 
 import android.content.Context;
 import android.content.res.Resources;

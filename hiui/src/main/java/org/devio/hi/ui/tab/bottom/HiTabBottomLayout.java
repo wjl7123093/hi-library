@@ -1,24 +1,22 @@
 package org.devio.hi.ui.tab.bottom;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
-import org.devio.hi.library.hilibrary.log.HiDisplayUtil;
+import org.devio.hi.library.hilibrary.util.HiDisplayUtil;
+import org.devio.hi.library.hilibrary.util.HiViewUtil;
 import org.devio.hi.ui.R;
 import org.devio.hi.ui.tab.common.IHiTabLayout;
 
@@ -130,6 +128,7 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         flParams.gravity = Gravity.BOTTOM;
         addBottomLine();
         addView(fl, flParams);
+//        fixContentView();
     }
 
     public void setTabAlpha(float alpha) {
@@ -176,6 +175,31 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         addView(view, params);
         float alpha = 0.8f;
         view.setAlpha(bottomAlpha);
+    }
+
+    /**
+     * 修复内容区域的 padding
+     */
+    private void fixContentView() {
+        if (!(getChildAt(0) instanceof ViewGroup)) {
+            // 如果不是内容区域（index == 0 表示内容区域）
+            return;
+        }
+        ViewGroup rootView = (ViewGroup) getChildAt(0); // index == 0 表示内容视图
+        ViewGroup targetView = HiViewUtil.findTypeView(rootView, RecyclerView.class);
+        if (targetView == null) {
+            targetView = HiViewUtil.findTypeView(rootView, ScrollView.class);
+        }
+        if (targetView == null) {
+            targetView = HiViewUtil.findTypeView(rootView, AbsListView.class);
+        }
+        if (targetView != null) {
+            targetView.setPadding(0, 0, 0, HiDisplayUtil.dp2px(tabBottomHeight, getResources()));
+            targetView.setClipToPadding(false);
+            // clipToPadding ViewGroup是否将裁剪它的子View，和根据它的padding（如果padding不为0）调整任何边缘效果（默认为 true）
+            // clipToPadding -> false 子View绘制到父View的padding里面
+            // 【android:clipToPadding的使用】https://blog.csdn.net/wangjiang_qianmo/article/details/54604378
+        }
     }
 
 }

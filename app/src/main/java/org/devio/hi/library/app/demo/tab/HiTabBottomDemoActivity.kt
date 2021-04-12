@@ -1,10 +1,13 @@
 package org.devio.hi.library.app.demo.tab
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_hi_tab_bottom_demo.*
 import org.devio.hi.library.app.R
+import org.devio.hi.library.hilibrary.util.HiDisplayUtil
 import org.devio.hi.ui.tab.bottom.HiTabBottom
 import org.devio.hi.ui.tab.bottom.HiTabBottomInfo
 import org.devio.hi.ui.tab.bottom.HiTabBottomLayout
@@ -40,13 +43,19 @@ class HiTabBottomDemoActivity : AppCompatActivity() {
             "#ffd44949"
         )
 
-        val infoCategory = HiTabBottomInfo(
+//        val infoCategory = HiTabBottomInfo(
+//            "分类",
+//            "fonts/iconfont.ttf",
+//            getString(R.string.if_category),
+//            null,
+//            "#ff656667",
+//            "#ffd44949"
+//        )
+        var bitmap = BitmapFactory.decodeResource(resources, R.drawable.fire, null)
+        val infoCategory = HiTabBottomInfo<String>(
             "分类",
-            "fonts/iconfont.ttf",
-            getString(R.string.if_category),
-            null,
-            "#ff656667",
-            "#ffd44949"
+            bitmap,
+            bitmap
         )
 
         val infoRecommend = HiTabBottomInfo(
@@ -76,5 +85,8 @@ class HiTabBottomDemoActivity : AppCompatActivity() {
             Toast.makeText(this@HiTabBottomDemoActivity, nextInfo.name, Toast.LENGTH_LONG).show()
         }
         hiTabBottomLayout.defaultSelected(infoHome)
+        // 改变某个 tab 高度
+        var tabBottom = hiTabBottomLayout.findTab(bottomInfoList[2])    // 中间Tab
+        tabBottom?.apply { resetHight(HiDisplayUtil.dp2px(66f, resources)) }
     }
 }

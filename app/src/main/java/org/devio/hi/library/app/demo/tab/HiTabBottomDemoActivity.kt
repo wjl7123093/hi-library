@@ -78,6 +78,7 @@ class HiTabBottomDemoActivity : AppCompatActivity() {
         bottomInfoList.add(infoHome)
         bottomInfoList.add(infoFavorite)
         bottomInfoList.add(infoCategory)
+
         bottomInfoList.add(infoRecommend)
         bottomInfoList.add(infoProfile)
         hiTabBottomLayout.inflateInfo(bottomInfoList)

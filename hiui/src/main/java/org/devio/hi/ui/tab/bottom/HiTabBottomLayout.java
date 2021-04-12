@@ -123,6 +123,7 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
                 }
             });
         }
+
         // 添加到父布局里
         LayoutParams flParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         flParams.gravity = Gravity.BOTTOM;
